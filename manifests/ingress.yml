@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry-ingress
+spec:
+  ingressClassName: registry
+  tls:
+  - hosts:
+      - myregistry.io
+    secretName: myregistry-tls
+  rules:
+    - host: myregistry.io
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: registry-service
+              port:
+                number: 80
