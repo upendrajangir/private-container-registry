@@ -4,8 +4,13 @@ metadata:
   name: registry-ingress
 spec:
   ingressClassName: registry
+  tls:
+  - hosts:
+      - myregistry.io
+    secretName: myregistry-tls
   rules:
-    - http:
+    - host: myregistry.io
+      http:
         paths:
         - path: /
           pathType: Prefix
